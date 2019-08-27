@@ -1,18 +1,13 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import './App.css';
 import Formulario from './components/Formulario'
 import Cita from './components/Cita';
 
 function App() {
 
-  let citasIniciales = JSON.parse(localStorage.getItem('citas'));
-
-  if(!citasIniciales) {
-    citasIniciales = [];
-  }
 
   //useState
-  const [ citas, guardarCitas] = useState(citasIniciales);
+  const [ citas, guardarCitas] = useState([]);
 
 
 
@@ -32,18 +27,6 @@ function App() {
     nuevasCitas.splice(index, 1);
     guardarCitas(nuevasCitas);
   }
-
-  useEffect(
-    () => {
-      let citasIniciales = JSON.parse(localStorage.getItem('citas'));
-
-      if(citasIniciales) {
-        localStorage.setItem('citas', JSON.stringify(citas));
-      } else {
-        localStorage.setItem('citas', []);
-      }
-    }, [citas]
-  )
 
   //Cargar titulo
   const titulo =  citas.length === 0 ? 'No hay citas':'Lista de citas'
